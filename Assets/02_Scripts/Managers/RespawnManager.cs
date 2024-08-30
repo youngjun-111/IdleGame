@@ -49,7 +49,6 @@ public class RespawnManager : MonoBehaviour
         }
     }
 
-
     //ºñÈ°¼ºÈ­µÈ ¿ÀºêÁ§Æ® ·£´ý ÀÎµ¦½º »Ì¾Æ³¿
     int DeactiveMob()
     {
@@ -73,11 +72,4 @@ public class RespawnManager : MonoBehaviour
         }
         return x;
     }
-
-
-    void Update()
-    {
-
-    }
-
 }

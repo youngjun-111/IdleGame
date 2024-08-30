@@ -11,12 +11,15 @@ public class DamageOn : MonoBehaviour
     {
         //생성, 스크립트는 몬스터에 적용
         GameObject inst = Instantiate(prefabDamage, transform);//이렇게만 해도 자식으로 생성 가능
-
-        //inst.transform.SetParent(transform); << 이렇게도 가능
+        inst.transform.SetParent(transform); //<<이렇게도 가능
+        criDamage.SetActive(false);
+        prefabDamage.SetActive(true);
     }
     public void CriDamageTxt()
     {
         GameObject inst = Instantiate(criDamage, transform);
         inst.transform.SetParent(transform);
+        criDamage.SetActive(true);
+        prefabDamage.SetActive(false);
     }
 }

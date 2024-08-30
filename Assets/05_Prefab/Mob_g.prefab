@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   att: 10
-  hp: 20000
-  startPos: {x: 10, y: -1.1}
+  hp: 100
+  startPos: {x: -11, y: 0}
   curTime: 0
   money: {fileID: 1139726515470215431, guid: 2c7607a2d335fc34e83326552f56494a, type: 3}
 --- !u!114 &2940654849749683022

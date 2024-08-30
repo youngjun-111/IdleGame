@@ -8,13 +8,14 @@ public class GameManager : MonoBehaviour
     public float gameSpeed = 3f;
     public bool isPlay = true;//Àû°ú ¸¶ÁÖÄ¥°æ¿ì ¸ØÃã
 
-    public float money = 1000;
+    public long money = 1000;
     public Text moneyText;
 
     public static GameManager instance;
     void Start()
     {
         instance = this;//½Ì±ÛÅæ
+        moneyText.text = money.ToAttackString() + " : Gold";
     }
 
 
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void SetMoney(float Money)
+    public void SetMoney(long Money)
     {
         money += Money;
         StartCoroutine(Count(money, money - Money));

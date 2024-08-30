@@ -25,10 +25,8 @@ public class DamagePopup : MonoBehaviour
         }
         else
         {
-            tmp_text.text = "Critical" + Player.GetComponent<PlayerController>().att.ToAttackString();
+            tmp_text.text = "CriticalHit! " + Player.GetComponent<PlayerController>().cirAtt.ToAttackString();
         }
-
-        tmp_text.text = Player.GetComponent<PlayerController>().att.ToAttackString();
         //.DoColor(color 목표값, float 변화시간)
         //.DoFade(float 목표값, float 변화시간)
         tmp_text.DOColor(color, 1f);

@@ -30,6 +30,7 @@ public class Monster : MonoBehaviour
         //Debug.Log(target.position);
 
         Player = GameObject.FindGameObjectWithTag("Player");
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -80,7 +81,7 @@ public class Monster : MonoBehaviour
             transform.position = startPos;//다시 처음 시작 지점으로 이동
             hp = oriHp;//체력 다시 처음 HP로 
             GameManager.instance.isPlay = true;//플레이를 다시 트루로 해줘서 플레이 속행
-            GameManager.instance.SetMoney(Random.Range(50,100));
+            GameManager.instance.SetMoney(Random.Range(5,1000));
         }
         else
         {
@@ -97,5 +98,4 @@ public class Monster : MonoBehaviour
         DamageOn damgeTxt = GetComponent<DamageOn>();
         damgeTxt.CriDamageTxt();
     }
-
 }
