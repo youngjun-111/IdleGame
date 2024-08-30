@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     //숫자 카운팅 애니메이션
     IEnumerator Count(float target, float current)
     {
-        float duration = 5f;//카운팅에 걸리는 시간
+        float duration = 1f;//카운팅에 걸리는 시간
         float offset = (target - current) / duration;//1000/0.5 = 2000
 
         while(current < target)

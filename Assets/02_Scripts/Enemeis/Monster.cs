@@ -78,7 +78,7 @@ public class Monster : MonoBehaviour
 
             gameObject.SetActive(false);//죽음 표시 꺼주는걸로
             transform.position = startPos;//다시 처음 시작 지점으로 이동
-            hp = oriHp;//체력 다시 100
+            hp = oriHp;//체력 다시 처음 HP로 
             GameManager.instance.isPlay = true;//플레이를 다시 트루로 해줘서 플레이 속행
             GameManager.instance.SetMoney(Random.Range(50,100));
         }
@@ -88,6 +88,14 @@ public class Monster : MonoBehaviour
             DamageOn damageTxt = GetComponent<DamageOn>();
             damageTxt.DamageTxt();
         }
+    }
+    public void CriDamage(long criAtt)
+    {
+        hp -= criAtt;
+
+        //크리티컬 데미지 처리
+        DamageOn damgeTxt = GetComponent<DamageOn>();
+        damgeTxt.CriDamageTxt();
     }
 
 }

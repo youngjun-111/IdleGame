@@ -6,7 +6,10 @@ using DG.Tweening;
 public class DamagePopup : MonoBehaviour
 {
     public GameObject canvas;
+    
     GameObject Player;
+    //일반 데미지, 크리데미지 구분
+    public Color color = Color.red;
 
     void Start()
     {
@@ -15,21 +18,24 @@ public class DamagePopup : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
 
         Text tmp_text = GetComponent<Text>();
+
+        if(color == Color.red)
+        {
+            tmp_text.text = Player.GetComponent<PlayerController>().att.ToAttackString();
+        }
+        else
+        {
+            tmp_text.text = "Critical" + Player.GetComponent<PlayerController>().att.ToAttackString();
+        }
+
         tmp_text.text = Player.GetComponent<PlayerController>().att.ToAttackString();
         //.DoColor(color 목표값, float 변화시간)
         //.DoFade(float 목표값, float 변화시간)
-        tmp_text.DOColor(Color.red, 1f);
+        tmp_text.DOColor(color, 1f);
         tmp_text.DOFade(0f, 1f);
         //스케일 변화
         transform.DOPunchScale(Vector3.one, 1);
         //현재 위치에서 + 알파 . 완료되면 삭제
-
         transform.DOMove(transform.position + Vector3.up * 2, 1).OnComplete(() => { Destroy(canvas); });
-
-    }
-
-    void Update()
-    {
-        
     }
 }

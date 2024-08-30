@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3940579137659251677}
   - component: {fileID: -6769957989753360118}
   - component: {fileID: -6072206081873237210}
-  - component: {fileID: 6609748265137724263}
   - component: {fileID: 2566538981895817728}
+  - component: {fileID: 1486522923493662337}
   m_Layer: 0
   m_Name: Mob_s
   m_TagString: Enemy
@@ -100,8 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d45a2620daf499428ff40224f490465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 500000000
+  att: 10
+  hp: 20000
   startPos: {x: 10, y: -1.1}
+  curTime: 0
   money: {fileID: 1139726515470215431, guid: 2c7607a2d335fc34e83326552f56494a, type: 3}
 --- !u!61 &-6072206081873237210
 BoxCollider2D:
@@ -148,19 +150,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.48316854, y: 0.5629574}
   m_EdgeRadius: 0
---- !u!114 &6609748265137724263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9063044450768176651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5146a3f22733ce042b974c79578fa569, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabDamage: {fileID: 7768105788951703922, guid: 270f8303299c64643b9603a2c222e192, type: 3}
 --- !u!95 &2566538981895817728
 Animator:
   serializedVersion: 5
@@ -182,3 +171,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1486522923493662337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9063044450768176651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5146a3f22733ce042b974c79578fa569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabDamage: {fileID: 7768105788951703922, guid: 270f8303299c64643b9603a2c222e192, type: 3}
+  criDamage: {fileID: 7768105788951703922, guid: dbfaa04fbf89cc341af3a68de087bdb5, type: 3}

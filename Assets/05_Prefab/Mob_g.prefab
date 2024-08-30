@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1839049350512843876}
   - component: {fileID: 4441565027363052876}
   - component: {fileID: 9086437504548488556}
-  - component: {fileID: 7493458461457079784}
+  - component: {fileID: 2940654849749683022}
   m_Layer: 0
   m_Name: Mob_g
   m_TagString: Enemy
@@ -144,10 +144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d45a2620daf499428ff40224f490465, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 500000000
+  att: 10
+  hp: 20000
   startPos: {x: 10, y: -1.1}
+  curTime: 0
   money: {fileID: 1139726515470215431, guid: 2c7607a2d335fc34e83326552f56494a, type: 3}
---- !u!114 &7493458461457079784
+--- !u!114 &2940654849749683022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabDamage: {fileID: 7768105788951703922, guid: 270f8303299c64643b9603a2c222e192, type: 3}
+  criDamage: {fileID: 7768105788951703922, guid: dbfaa04fbf89cc341af3a68de087bdb5, type: 3}
