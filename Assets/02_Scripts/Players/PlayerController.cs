@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
                 currentTime = Time.time;
                 //공격 속도에 맞게 애니메이션 재생
                 anim.SetBool("att", true);
-                //크리티컬 확률 1% 로하고 업그레이드시 1%씩 증가
+                //크리티컬 확률 1% 로하고 업그레이드시 0.1%씩 증가
                if(Random.Range(1, 101) <= cri)
                 {
                     Critical();
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             GameManager.instance.SetMoney(-1000);
-            cri += 1;
+            cri += 0.1f;
             criTxt.text = "현재 치명타 확률 : " + cri + " %";
         }
     }
