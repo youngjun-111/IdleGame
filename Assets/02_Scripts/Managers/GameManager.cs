@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
         moneyText.text = money.ToAttackString() + " : Gold";
     }
 
-
     void Update()
     {
         if (isPlay)
@@ -35,7 +34,8 @@ public class GameManager : MonoBehaviour
     IEnumerator Count(float target, float current)
     {
         //카운팅에 걸리는 시간
-        float duration = 0.2f;
+        float duration = Mathf.Lerp(0.2f, 0f, 0.2f);
+        //float duration = 0.2f;
         // 매 프레임마다 증가시킬 금액 계산
         float offset = (target - current) / duration;
 
@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
         moneyText.text = string.Format("{0:n0}", (int)current) + " : Gold";
 
     }
-
 
     public void SetMoney(long Money)
     {

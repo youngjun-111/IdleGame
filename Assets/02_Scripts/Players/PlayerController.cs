@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float dex = 1;
     public float cri = 1;
     public long cirAtt;
+    float criDamage = 1.5f;
     [Header("생존관련")]
     public long hp = 100;
     public long maxHp = 100;
@@ -29,6 +30,9 @@ public class PlayerController : MonoBehaviour
     GameObject mob = null;
     Animator anim;
     float currentTime = 0;
+    //일시적으로 값을 올렸다가 다시 빼줘야함
+    public List<Buff> onBuff = new List<Buff>();
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -42,6 +46,10 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instance.isPlay)
         {
             anim.SetBool("att", false);
+            if(anim.GetBool("att") == false)
+            {
+                anim.speed = 1f;
+            }
         }
         else
         {
@@ -52,8 +60,10 @@ public class PlayerController : MonoBehaviour
                 currentTime = Time.time;
                 //공격 속도에 맞게 애니메이션 재생
                 anim.SetBool("att", true);
+                //초기 민첩성
+                anim.speed = dex;
                 //크리티컬 확률 1% 로하고 업그레이드시 0.1%씩 증가
-               if(Random.Range(1, 101) <= cri)
+                if (Random.Range(1, 101) <= cri)
                 {
                     Critical();
                 }
@@ -63,8 +73,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        //초기 민첩성
-        anim.speed = dex;
     }
 
     void UpdateUI()
@@ -79,8 +87,7 @@ public class PlayerController : MonoBehaviour
     //크리티컬 데미지
     public void Critical()
     {
-        float ciritical = 1.5f;
-        cirAtt = att * (long)ciritical;
+        cirAtt = att * (long)criDamage;
         mob.GetComponent<Monster>().CriDamage(cirAtt);
     }
 
@@ -88,7 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         hp_bar.fillAmount = hp / maxHp;
 
-        hp -= (monAtt - (long)(def / 1000));
+        hp -= (monAtt - (long)def);
 
         if (hp <= 0)
         {
@@ -102,6 +109,83 @@ public class PlayerController : MonoBehaviour
             noti.text = "";
         }
     }
+
+    #region 버프관련
+    //버프 적용 함수
+    public float BuffChange(string type, float origin)
+    {
+        //리스트에 버프가 담기면...
+        if(onBuff.Count > 0)
+        {
+            float temp = 0;
+            //버프수 만큼 반복을 통해 버프를 (버프의 타입이 같다면) 누적 시킨다.
+            for(int i = 0; i < onBuff.Count; i++)
+            {
+                //버프의 타입이 (매개변수와)같다면
+                if (onBuff[i].type.Equals(type))
+                {
+                    temp += origin * onBuff[i].percentage;
+                }
+            }
+            //누적된 값을 반환
+            return origin + temp;
+        }
+        //버프가 끝나면(버프가 없다면) 기본값으로 돌려준다.
+        else
+        {
+            return origin;
+        }
+    }
+    //버프값을 빼주는 함수
+    public float mBuffChange(string type, float origin)
+    {
+        if(onBuff.Count > 0)
+        {
+            float temp = 0;
+            for (int i = 0; i < onBuff.Count; i++)
+            {
+                if (onBuff[i].type.Equals(type))
+                {
+                    temp += origin * onBuff[i].percentage;
+                }
+            }
+            return origin - temp;
+        }
+        else
+        {
+            return origin;
+        }
+    }
+
+    //버프의 타입에 따른 공격력(att), 민첩(dex)에 버프 적용 시키는 함수
+    public void ChooseBuff(string type)
+    {
+        switch (type)
+        {
+            case "Atk":
+                att = (long)BuffChange(type, att);
+                break;
+            case "dex":
+                dex = BuffChange(type, dex);
+                break;
+        }
+    }
+    //버프의 타입에 따른 공격력 민첩 버프를 다시 빼주는 함수
+    public void MinusBuff(string type)
+    {
+        switch (type)
+        {
+            case "Atk":
+                att = (long)mBuffChange(type, att);
+                break;
+            case "dex":
+                dex = mBuffChange(type, dex);
+                break;
+        }
+    }
+    #endregion
+
+    #region 업그레이드
 
     //데미지 업그레이드
     public void AttackUp()
@@ -163,8 +247,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             GameManager.instance.SetMoney(-1000);
-            dex += 0.1f;
-
+            dex += 0.01f;
             GameManager.instance.gameSpeed += (dex);
             dexTxt.text = "현재 민첩성 : " + dex;
         }
@@ -184,17 +267,18 @@ public class PlayerController : MonoBehaviour
             criTxt.text = "현재 치명타 확률 : " + cri + " %";
         }
     }
-    
+    #endregion
 
     void Die()
     {
         GameManager.instance.isPlay = false;
         anim.SetTrigger("dead");
     }
+   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             GameManager.instance.isPlay = false;
             mob = collision.gameObject;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3392030209761071109}
   - component: {fileID: 1699420533877681314}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: NormalDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

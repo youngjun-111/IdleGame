@@ -12,7 +12,6 @@ public class Buff : MonoBehaviour
     public Image icon;
 
     PlayerController player;
-
     private void Awake()
     {
         icon = GetComponent<Image>();
@@ -30,8 +29,13 @@ public class Buff : MonoBehaviour
         Execute();
     }
     
+    //버프를 적용시킬 함수
     public void Execute()
     {
+        //플레이어에 버프 효과 적용
+        player.onBuff.Add(this);
+        player.ChooseBuff(type);
+        //후에 코루틴 실행
         StartCoroutine(Activation());
     }
 
@@ -55,9 +59,14 @@ public class Buff : MonoBehaviour
 
         DeActivation();
     }
-    
+
+    //버프가 끝나고 처리할 함수
     public void DeActivation()
     {
+        //버프를 빼준다음에
+        player.onBuff.Remove(this);
+        player.ChooseBuff(type);
+        //삭제 시키기
         Destroy(gameObject);
     }
 }

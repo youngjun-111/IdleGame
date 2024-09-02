@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 3392030209761071109}
   - component: {fileID: 1699420533877681314}
   m_Layer: 5
-  m_Name: Canvas 1
+  m_Name: CriDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8302417662077324848
 RectTransform:
   m_ObjectHideFlags: 0
@@ -197,4 +197,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 7768105788951703922}
-  color: {r: 1, g: 0.96559095, b: 0, a: 1}
+  color: {r: 1, g: 1, b: 0, a: 1}

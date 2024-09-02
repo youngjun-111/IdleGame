@@ -23,17 +23,17 @@ public class DamagePopup : MonoBehaviour
         {
             tmp_text.text = Player.GetComponent<PlayerController>().att.ToAttackString();
         }
-        else
+        else if (color == Color.yellow)
         {
             tmp_text.text = "CriticalHit! " + Player.GetComponent<PlayerController>().cirAtt.ToAttackString();
         }
         //.DoColor(color 목표값, float 변화시간)
         //.DoFade(float 목표값, float 변화시간)
-        tmp_text.DOColor(color, 1f);
-        tmp_text.DOFade(0f, 1f);
+        tmp_text.DOColor(color, 2);
+        tmp_text.DOFade(0f, 2);
         //스케일 변화
         transform.DOPunchScale(Vector3.one, 1);
         //현재 위치에서 + 알파 . 완료되면 삭제
-        transform.DOMove(transform.position + Vector3.up * 2, 1).OnComplete(() => { Destroy(canvas); });
+        transform.DOMove(transform.position + Vector3.up * 3, 3f).OnComplete(() => { Destroy(canvas); });
     }
 }

@@ -13,13 +13,11 @@ public class Monster : MonoBehaviour
     Animator anim;
     public float curTime;
 
-
     GameObject Player;
     //동전 프리팹
     //나올 위치
     public GameObject money;
     Transform target;
-    // Start is called before the first frame update
     void Start()
     {
         //시작하자 마자 hp값을 담아야함
@@ -39,7 +37,8 @@ public class Monster : MonoBehaviour
         if (GameManager.instance.isPlay)
         {
             transform.Translate(Vector2.left * Time.deltaTime * GameManager.instance.gameSpeed);
-
+            anim.SetBool("att", false);
+            anim.speed = GameManager.instance.gameSpeed - 2f;
             if(transform.position.x < -16)
             {
                 gameObject.SetActive(false);//오브젝트 풀 용SetActive
@@ -51,13 +50,13 @@ public class Monster : MonoBehaviour
             if (curTime >= 1)
             {
                 float dis = Vector3.Distance(Player.transform.position, transform.position);
-
-                if (dis <= 3)
+                curTime += Time.deltaTime;
+                if (dis <= 4)
                 {
                     anim.SetBool("att", true);
                     Player.GetComponent<PlayerController>().Damage(att);
-                    curTime = 0;
                 }
+                curTime = 0;
             }
         }
     }

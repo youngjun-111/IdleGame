@@ -5,8 +5,6 @@ using UnityEngine;
 public class GroundScroll : MonoBehaviour
 {
     public Vector3 oriPos;
-    //public float speed = 3f;
-
 
     void Start()
     {
@@ -24,8 +22,5 @@ public class GroundScroll : MonoBehaviour
 
             transform.Translate(Vector3.left * GameManager.instance.gameSpeed * Time.deltaTime);
         }
-        
     }
-
-
 }
